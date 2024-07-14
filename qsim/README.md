@@ -1,7 +1,5 @@
 # QSim
 
-This repo provides some basic data structures and functions necessary for quantum circuit simulation. 
-
 ## 1. Basic Data Structures
 
 ### 1.1. The Matrix Structure
