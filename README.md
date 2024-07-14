@@ -1,19 +1,19 @@
 # The Programming Assignment of Quantum Computing
 
-# Assignment 1: Operation Matrix Simulations
+# Assignment 2: State Vector Simulations
 
-The assignment description can be found in [240715-a1-OMSim.pdf](https://github.com/bdis-q/QSimLab/blob/a1-omsim/240715-a1-OMSim.pdf). 
-To get started, please clone the repository first. 
+The assignment description can be found in [240722-a2-SVSim.pdf](https://github.com/bdis-q/QSimLab/blob/a1-omsim/240722-a2-SVSim.pdf). 
+To get started, please make sure that you have already commit the changes made to `a1-omsim`. Then, checkout to the `a2-svsim` branch and merge the work from `a1-omsim`. 
 
 ```shell
-git clone https://github.com/bdis-q/QSimLab.git
-git checkout a1-omsim
+git checkout a2-svsim
+git pull # update this branch
+git merge a1-omsim -m "Continue to work on a2."
 ```
 
 Then, you can compile and run this project. Please note that the `Makefile` is designed for Windows. Codes that need to be implemented are marked with `[TODO]` labels. 
 
 ```shell
-cd QSimLab
 make
 [path_to_your_QSimLab_dir]/QSimLab/obj/main.exe > output.txt
 ```
@@ -27,5 +27,5 @@ python py/main.py > pyoutput.txt
 After you finish this assignment, you can commit your work locally. The message after `-m` can be determined by yourself. 
 
 ```shell
-git commit -a -m "My work on a1 is done."
+git commit -a -m "My work on a2 is done."
 ```

@@ -28,7 +28,7 @@ Matrix<DTYPE> getCompleteMatrix(QGate& gate);
  *
  * @param gate the processing gate
  * @return Matrix<DTYPE> a complete gate matrix
-*/
+ */
 Matrix<DTYPE> genControlledGateMatrix(QGate& gate);
 
 /**

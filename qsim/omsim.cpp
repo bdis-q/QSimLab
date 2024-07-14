@@ -88,7 +88,7 @@ Matrix<DTYPE> getCompleteMatrix(QGate& gate) {
  *
  * @param gate the processing gate
  * @return Matrix<DTYPE> a complete gate matrix
-*/
+ */
 Matrix<DTYPE> genControlledGateMatrix(QGate& gate) {
     int ctrl = gate.controlQubits[0];
     int targ = gate.targetQubits[0];

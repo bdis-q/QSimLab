@@ -1,22 +1,22 @@
-#include "omsim.h"
+#include "svsim.h"
 
 QCircuit test() {
     // test circuit
     int numQubits = 4;
     QCircuit qc(numQubits, "test");
-    qc.x(0);
-    qc.barrier();
     for (int i = 0; i < numQubits; ++ i) {
-        qc.h(i);
+        qc.rx((double)i / numQubits, i);
     }
-    qc.cx(2, 0);
-    qc.barrier();
     for (int i = 1; i < numQubits; ++ i) {
-        qc.h(i);
+        qc.cx(i, i - 1);
     }
-    for (int i = 0; i < numQubits/2; ++ i) {
-        qc.swap(i, numQubits - i - 1);
+    for (int i = 0; i < numQubits; ++ i) {
+        qc.ry((double)i / numQubits, i);
     }
+    for (int i = 0; i < numQubits; ++ i) {
+        qc.rz((double)i / numQubits, i);
+    }
+    qc.swap(1, 3);
     qc.print();
     return qc;
 }
@@ -26,10 +26,7 @@ int main() {
     sv.data[0][0] = 1;
 
     QCircuit qc = test();
-    Matrix<DTYPE> opMat = OMSim(sv, qc);
-
-    cout << "The operation matrix: " << endl;
-    opMat.print();
+    SVSim(sv, qc);
 
     cout << "The final state vector: " << endl;
     sv.print();
