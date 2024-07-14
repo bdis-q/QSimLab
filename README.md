@@ -7,7 +7,6 @@ To get started, please make sure that you have already commit the changes made t
 
 ```shell
 git checkout a2-svsim
-git branch --set-upstream-to=origin/a2-svsim a2-svsim
 git pull # update this branch
 git merge a1-omsim -m "Continue to work on a2."
 ```
