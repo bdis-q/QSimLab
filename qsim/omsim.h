@@ -32,7 +32,7 @@ Matrix<DTYPE> getCompleteMatrix(QGate& gate);
 Matrix<DTYPE> genControlledGateMatrix(QGate& gate);
 
 /**
- * @brief Generate the gate matrix of a swap gate
+ * @brief Generate the gate matrix of a SWAP gate
  * 
  * @param gate the processing SWAP gate
  * @return Matrix<DTYPE> a complete gate matrix
