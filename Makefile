@@ -1,5 +1,4 @@
 # Makefile for this project
-# make && D:\abuqiqi\Project\QMerge\obj\main.exe > output.txt
 
 # ---------------------	macros --------------------------
 
@@ -11,7 +10,6 @@ CCFLAGS := -std=c++11 -Wall -Werror
 QSIM_DIR := qsim
 MAIN_DIR := main
 OBJ_DIR := obj
-OUT_DIR := output
 
 INCFLAGS := -I./$(QSIM_DIR)/
 
@@ -26,7 +24,7 @@ QSIM_OBJS := $(addprefix $(OBJ_DIR)/, $(patsubst %.cpp,%.o,$(QSIM_CPPS)))
 
 # --------------------- main -----------------------
 
-MAIN_CPPS := $(MAIN_DIR)/test.cpp
+MAIN_CPPS := $(MAIN_DIR)/*.cpp
 MAIN_CPPS := $(wildcard $(MAIN_CPPS))
 
 MAIN_OBJS := $(patsubst $(MAIN_DIR)/%.cpp,$(OBJ_DIR)/%,$(MAIN_CPPS))
@@ -40,12 +38,12 @@ TARGETS := $(MAIN_OBJS)
 
 all: $(TARGETS)
 
-# mkdir obj obj/util output
+# mkdir obj obj/qsim
 $(OBJ_DIR):
 	mkdir $(OBJ_DIR)
-	mkdir $(OBJ_DIR)\qsim
+	mkdir $(OBJ_DIR)\$(QSIM_DIR)
 
-# utility functions: util/*.cpp -> obj/util/*.o
+# utility functions: qsim/*.cpp -> obj/qsim/*.o
 $(OBJ_DIR)/%.o: %.cpp
 	@echo "[INFO] Compiling" $< ...
 	@$(COMPILE) -c $< -o $@

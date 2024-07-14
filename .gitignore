@@ -1,2 +1,3 @@
 obj/
 qsim/omsim.cpp
+*.txt

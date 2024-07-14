@@ -1,33 +1,39 @@
+import numpy as np
 from qiskit import QuantumCircuit
-from mqt import ddsim
-from mqt.ddsim import CircuitSimulator
-import time
-from math import pi
 from qiskit_aer import AerSimulator
-import qiskit.quantum_info as qi
+from qiskit.quantum_info import Operator
 
-from qcircuit import *
-
-def qcircuit():
+def test():
     numQubits = 4
     qc = QuantumCircuit(numQubits)
     qc.x(0)
     qc.barrier()
     for i in range(numQubits):
         qc.h(i)
-    qc.cx(1, 0)
+    qc.cx(2, 0)
+    qc.barrier()
     for i in range(1, numQubits):
         qc.h(i)
-    # measure
+    for i in range(numQubits//2):
+        qc.swap(i, numQubits-i-1)
+    return qc
 
-def qiskitSim(circ) :
+def QiskitSim(qc):
+    print("The operation matrix: ")
+    for row in np.asarray(Operator(qc)):
+        for e in row:
+            print(f"{e:.2f}", end=" ")
+        print()
+
+    print("The final state vector: ")
+    qc.save_statevector()
     simulator = AerSimulator(method='statevector')
-#     circ = transpile(circ, simulator)
-    result = simulator.run(circ).result()
-#     statevector = result.get_statevector(circ)
-#     print(statevector)
-    # print(result.data(0))
+    result = simulator.run(qc).result()
+    statevector = result.get_statevector(qc)
+    for amp in np.asarray(statevector): 
+        print(f"{amp:.6f}")
 
 if __name__ == '__main__':
-    circ = qcircuit()
-    qiskitSim(circ)
+    qc = test()
+    # qc.draw()
+    QiskitSim(qc)

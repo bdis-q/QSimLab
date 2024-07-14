@@ -285,8 +285,8 @@ void Matrix<T>::print() const {
     } else {
         for (ll i = 0; i < row; i++) {
             for (ll j = 0; j < col; j++) {
-                cout.width(8);
-                cout << std::setprecision(4) << data[i][j];
+                cout.width(13);
+                cout << fixed << setprecision(2) << data[i][j];
             }
             cout << endl;
         }
