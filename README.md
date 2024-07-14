@@ -2,7 +2,7 @@
 
 # Assignment 2: State Vector Simulations
 
-The assignment description can be found in [240722-a2-SVSim.pdf](https://github.com/bdis-q/QSimLab/blob/a1-omsim/240722-a2-SVSim.pdf). 
+The assignment description can be found in [240722-a2-SVSim.pdf](https://github.com/bdis-q/QSimLab/blob/a2-svsim/240722-a2-SVSim.pdf). 
 To get started, please make sure that you have already commit the changes made to `a1-omsim`. Then, checkout to the `a2-svsim` branch and merge the work from `a1-omsim`. 
 
 ```shell
