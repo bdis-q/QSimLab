@@ -1,22 +1,21 @@
 # The Programming Assignment of Quantum Computing
 
-# Assignment 2: State Vector Simulations
+# Assignment 3: Distributed Quantum Circuit Simulations
 
-The assignment description can be found in [240722-a2-SVSim.pdf](https://github.com/bdis-q/QSimLab/blob/a2-svsim/240722-a2-SVSim.pdf). 
-To get started, please make sure that you have already commit the changes made to `a1-omsim`. Then, checkout to the `a2-svsim` branch and merge the work from `a1-omsim`. 
+The assignment description can be found in [240805-a3-DisQSim.pdf](https://github.com/bdis-q/QSimLab/blob/a3-disqsim/240805-a3-DisQSim.pdf). 
+To get started, please make sure that you have already commit the changes made to `a2-svsim`. Then, checkout to the `a3-disqsim` branch and merge the work from `a2-svsim`. 
 
 ```shell
-git checkout a2-svsim
-git branch --set-upstream-to=origin/a2-svsim a2-svsim
+git checkout a3-disqsim
 git pull # update this branch
-git merge a1-omsim -m "Continue to work on a2."
+git merge a2-svsim -m "Continue to work on a3."
 ```
 
-Then, you can compile and run this project. Please note that the `Makefile` is designed for Windows. Codes that need to be implemented are marked with `[TODO]` labels. 
+Then, you can compile and run this project. Codes that need to be implemented are marked with `[TODO]` labels. 
 
 ```shell
 make
-[path_to_your_QSimLab_dir]/QSimLab/obj/main.exe > output.txt
+./obj/main > output.txt
 ```
 
 Once you have completed all the missing parts, you can compare the simulation results with the output of the Qiskit simulator provided in the `py/main.py`. We use `qiskit@1.0.2` and `qiskit_aer@0.14.0.1`. 
@@ -28,5 +27,5 @@ python py/main.py > pyoutput.txt
 After you finish this assignment, you can commit your work locally. The message after `-m` can be determined by yourself. 
 
 ```shell
-git commit -a -m "My work on a2 is done."
+git commit -a -m "My work on a3 is done."
 ```
