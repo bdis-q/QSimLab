@@ -32,7 +32,7 @@ Matrix<DTYPE> OMSim(Matrix<DTYPE>& sv, QCircuit& qc) {
 
         // ///////////////////////////////////////////////////////////////////////////
         // [TODO] Step 2. Get the complete gate matrices of the remaining gates
-        //        Step 2.1. Skip the Mark gates
+        //        Step 2.1. Skip the MARK gates
         //        Step 2.2. Calculate the tensor product of the gate matrices
 
 
