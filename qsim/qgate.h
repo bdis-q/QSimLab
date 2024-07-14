@@ -27,9 +27,6 @@ public:
     
     bool isControlQubit(int qid); // check if qubit[qid] is a control qubit of the gate
     bool isTargetQubit(int qid); // check if qubit[qid] is a target qubit of the gate
-
-    bool is2x2GateMatrix(); // check if the gate matrix is a 2x2 matrix
-    bool is4x4GateMatrix(); // check if the gate matrix is a 4x4 matrix
     
     void print(); // print the gate information
 

@@ -113,12 +113,12 @@ bool QGate::isMARK() {
 
 // Check if the gate is a single-qubit gate
 bool QGate::isSingle() {
-    return gname != "IDE" && controlQubits.size() == 0 && targetQubits.size() == 1;
+    return gname != "IDE" && gname != "MARK" && controlQubits.size() == 0 && targetQubits.size() == 1;
 }
 
 // Check if the gate is a 2-qubit controlled gate
 bool QGate::is2QubitControlled() {
-    return controlQubits.size() == 1 && targetQubits.size() == 1;
+    return gname != "MARK" && controlQubits.size() == 1 && targetQubits.size() == 1;
 }
 
 // Check if qubit[qid] is a control qubit of the gate
@@ -128,17 +128,7 @@ bool QGate::isControlQubit(int qid) {
 
 // Check if qubit[qid] is a target qubit of the gate
 bool QGate::isTargetQubit(int qid) {
-    return gname != "IDE" && find(targetQubits.begin(), targetQubits.end(), qid) != targetQubits.end();
-}
-
-// Check if the gate matrix is a 2x2 matrix
-bool QGate::is2x2GateMatrix() {
-    return gmat->row == 2 && gmat->col == 2;
-}
-
-// Check if the gate matrix is a 4x4 matrix
-bool QGate::is4x4GateMatrix() {
-    return gmat->row == 4 && gmat->col == 4;
+    return gname != "IDE" && gname != "MARK" && find(targetQubits.begin(), targetQubits.end(), qid) != targetQubits.end();
 }
 
 // Print the gate information

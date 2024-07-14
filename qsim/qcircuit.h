@@ -41,10 +41,3 @@ public:
 
     void add_level();
 };
-
-//
-// Quantum circuit generators
-//
-
-QCircuit QFT(int numQubits);
-QCircuit QAOA(int numQubits);

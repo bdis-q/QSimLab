@@ -42,10 +42,13 @@ public:
     void identity(ll r); // Set the matrix to be an identity matrix
     void zero(ll r, ll c); // Set the matrix to be a zero matrix
 
+    bool isZero() const; // Check if the matrix is a zero matrix
+    
     //
     // Utility functions
     //
     void print() const; // Print a Matrix
+    void printMatrixDict(); // Print the matrix dictionary
     static void initMatrixDict();
 
     //

@@ -257,37 +257,3 @@ void QCircuit::add_level() {
     gates.push_back(level);
     numDepths ++;
 }
-
-//
-// Quantum circuit generators
-//
-
-/**
- * @brief Generate a QAOA quantum circuit
- * 
- * @param numQubits #Qubits
- * @return QCircuit  the generated quantum circuit
- */
-QCircuit QAOA(int numQubits) {
-    QCircuit qc(numQubits, "QAOA");
-    for (int i = 0; i < numQubits; ++ i)
-        qc.h(i);
-    
-    for (int j = 0; j < numQubits - 1; ++ j) {
-        for (int i = j + 1; i < numQubits; ++ i) {
-            qc.cx(j, i);
-            qc.rz(0.5, i);
-            qc.cx(j, i);
-        }
-    }
-
-    for (int i = 0; i < numQubits; ++ i)
-        qc.h(i);
-    for (int i = 0; i < numQubits; ++ i)
-        qc.rz(0.5, i);
-    for (int i = 0; i < numQubits; ++ i)
-        qc.h(i);
-
-    qc.print();
-    return qc;
-}
