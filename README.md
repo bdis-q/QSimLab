@@ -1,4 +1,4 @@
-# The Programming Assignment of Quantum Computing
+# The Programming Assignments of Quantum Computing
 
 # Assignment 3: Distributed Quantum Circuit Simulations
 
