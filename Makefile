@@ -1,10 +1,10 @@
-# Makefile for this project
+# Makefile for this project on Linux
 
 # ---------------------	macros --------------------------
 
 # compiler and flags
-CC := g++
-CCFLAGS := -std=c++11 -Wall -Werror
+CC := mpic++
+CCFLAGS := -std=c++11 -Wall -Werror -pthread
 
 # directories
 QSIM_DIR := qsim
@@ -40,8 +40,8 @@ all: $(TARGETS)
 
 # mkdir obj obj/qsim
 $(OBJ_DIR):
-	mkdir $(OBJ_DIR)
-	mkdir $(OBJ_DIR)\$(QSIM_DIR)
+	@-mkdir -p $(OBJ_DIR)
+	@-mkdir -p $(OBJ_DIR)/$(QSIM_DIR)
 
 # utility functions: qsim/*.cpp -> obj/qsim/*.o
 $(OBJ_DIR)/%.o: %.cpp
@@ -56,4 +56,4 @@ $(OBJ_DIR)/%: $(OBJ_DIR) $(MAIN_CPPS) $(UTIL_OBJS) $(QSIM_OBJS)
 
 # clean
 clean:
-	del /s /q $(OBJ_DIR)
+	rm -rf $(OBJ_DIR)
