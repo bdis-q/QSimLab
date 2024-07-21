@@ -320,8 +320,8 @@ map<string, shared_ptr<Matrix<T>>> Matrix<T>::MatrixDict; // A global matrix dic
 
 template<typename T>
 void Matrix<T>::initMatrixDict() {
-    T mark[1][1] = {{1}}; // placeholder
-    MatrixDict["MARK"] = make_shared<Matrix<T>>(1, 1, (T**)mark);
+    // T mark[1][1] = {{1}}; // placeholder
+    // MatrixDict["MARK"] = make_shared<Matrix<T>>(1, 1, (T**)mark);
 
     // T zeros[2][1] = {{1}, {0}};
     // MatrixDict["ZEROS"] = make_shared<Matrix<T>>(2, 1, (T**)zeros);
@@ -340,6 +340,7 @@ void Matrix<T>::initMatrixDict() {
     T ide[2][2] = {{1, 0},
                    {0, 1}};
     MatrixDict["IDE"] = make_shared<Matrix<T>>(2, 2, (T**)ide);
+    MatrixDict["MARK"] = MatrixDict["IDE"];
 
     T h[2][2] = {{1.0 / sqrt(2), 1.0 / sqrt(2)},
                  {1.0 / sqrt(2), -1.0 / sqrt(2)}};

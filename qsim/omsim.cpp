@@ -62,7 +62,7 @@ Matrix<DTYPE> OMSim(Matrix<DTYPE>& sv, QCircuit& qc) {
  * @return Matrix<DTYPE> a complete gate matrix
  */
 Matrix<DTYPE> getCompleteMatrix(QGate& gate) {
-    if (gate.isIDE() || gate.isSingle()) {
+    if (gate.isMARK() || gate.isIDE() || gate.isSingle()) {
         return * gate.gmat;
     }
     if (gate.is2QubitControlled()) {
