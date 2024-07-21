@@ -102,7 +102,7 @@ void svsimForGate(Matrix<DTYPE>& sv, QGate& gate) {
  */
 bool isLegalControlPattern(ll ampidx, QGate& gate) {
     int ctrl;
-    ll ctrlmask = 0;
+    ll ctrlmask;
     for (int i = 0; i < gate.numControls(); ++ i) {
         // [TODO] Check the control qubits of the gate ////////////////
         // [HINT] If the i-th bit of amp is 0 and q_i is a |1> control qubit of gate, return false. 
