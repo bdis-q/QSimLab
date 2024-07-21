@@ -29,17 +29,17 @@ void* highOMSim(void* arg) {
         // [TODO] Calculate the operation matrix for gates applied to high-order qubits
         // [HINT] We have modified getCompleteMatrix to deal with MARK
         //        In this assignment, MARK is associated with an identity matrix
-        // cout << "[TODO] Calculate the operation matrix for gates applied to high-order qubits" << endl;
-        // exit(1);
-        levelmat = move(getCompleteMatrix(qc.gates[j][qid]));
-        for (int i = qid - 1; i >= numLowQubits; -- i) {
-            if (qc.gates[j][i].isMARK() && qc.gates[j][i].targetQubits[0] >= numLowQubits) {
-                continue;
-            }
-            Matrix<DTYPE> tmpmat = move(getCompleteMatrix(qc.gates[j][i]));
-            levelmat = move(levelmat.tensorProduct(tmpmat));
-        }
-        opmat = move(levelmat * opmat);
+        cout << "[TODO] Calculate the operation matrix for gates applied to high-order qubits" << endl;
+        exit(1);
+
+
+
+
+
+
+
+
+
         // ///////////////////////////////////////////////////////////////////////////
     }
 
@@ -48,7 +48,7 @@ void* highOMSim(void* arg) {
 }
 
 /**
- * @brief [TODO] Conduct SVSim for low-order qubits
+ * @brief Conduct SVSim for low-order qubits
  *
  * @param localSv the local state vector
  * @param qc the original quantum circuit
@@ -70,7 +70,9 @@ void lowSVSim(Matrix<DTYPE>& localSv, QCircuit& qc, int myRank) {
  * @brief [TODO] Check if the index of an amplitude is a legal control pattern of the gate
  * 
  * @param ampidx the amplitude index
- * @param gate   the processing gate
+ * @param gate the processing gate
+ * @param numLowQubits #low-order qubits in QuanPath
+ * @param myRank the MPI rank
  * @return true  ampidx is a legal control pattern
  * @return false ampidx is an illegal control pattern
  */
@@ -80,20 +82,20 @@ bool isQuanPathLegalControlPattern(ll ampidx, QGate& gate, int numLowQubits, int
     for (int i = 0; i < gate.numControls(); ++ i) {
         // [HINT] If the control qubits is low-order, mask with ampidx
         //        Otherwise, mask with myRank
-        // cout << "[TODO] Check the control qubits of the gate." << endl;
-        // exit(1);
-        ctrl = gate.controlQubits[i];
-        if (ctrl < numLowQubits) {
-            ctrlmask = (1 << ctrl);
-            if ((ampidx & ctrlmask) == 0) {
-                return false;
-            }
-        } else {
-            ctrlmask = (1 << (ctrl - numLowQubits));
-            if ((myRank & ctrlmask) == 0) {
-                return false;
-            }
-        }
+        cout << "[TODO] Check the control qubits of the gate." << endl;
+        exit(1);
+
+
+
+
+
+
+
+
+
+
+
+
         // ///////////////////////////////////////////////////////////////////////////
     }
     return true;
