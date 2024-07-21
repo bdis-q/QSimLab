@@ -122,35 +122,35 @@ void merge(Matrix<DTYPE>& localSv, Matrix<DTYPE>* ptrOpmat, int numWorkers, int 
     }
 
     // [TODO] Conduct the final merge operation
-    // cout << "[TODO] Conduct the final merge operation. " << endl;
-    // exit(1);
+    cout << "[TODO] Conduct the final merge operation. " << endl;
+    exit(1);
     // all-to-all communication 1
-    int ret = MPI_Alltoall(sendbuf, group, MPI_DOUBLE_COMPLEX, recvbuf, group, MPI_DOUBLE_COMPLEX, MPI_COMM_WORLD);
-    assert(ret == MPI_SUCCESS);
+
+
 
     // local merge computation
-    for (ll k = 0; k < localSv.row; ++ k) {
-        sendbuf[k] = 0;
-    }
-    ll iStart, jStart;
-    for (int i = 0; i < numWorkers; ++ i) {
-        iStart = i * group; // the start point of each group
-        for (int j = 0; j < numWorkers; ++ j) {
-            jStart = j * group; // the offset within each group
-            for (ll k = 0; k < group; ++ k) {
-                sendbuf[iStart + k] += ptrOpmat->data[i][j] * recvbuf[jStart + k];
-            }
-        }
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // all-to-all communication 2
-    ret = MPI_Alltoall(sendbuf, group, MPI_DOUBLE_COMPLEX, recvbuf, group, MPI_DOUBLE_COMPLEX, MPI_COMM_WORLD);
-    assert(ret == MPI_SUCCESS);
+
+
 
     // update localSv
-    for (ll k = 0; k < localSv.row; ++ k) {
-        memcpy(localSv.data[k], recvbuf + k, sizeof(DTYPE));
-    }
+
+
+
     // ///////////////////////////////////////////////////////////////////////////
 
     delete [] sendbuf;
