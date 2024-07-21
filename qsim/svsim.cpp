@@ -2,9 +2,9 @@
 
 /**
  * @brief Conduct the state vector simulation for a quantum circuit
- * 
- * @param sv    the initial state vector
- * @param qc    a quantum circuit
+ *
+ * @param sv the state vector
+ * @param qc a quantum circuit
  */
 void SVSim(Matrix<DTYPE>& sv, QCircuit& qc) {
     for (int j = 0; j < qc.numDepths; ++ j) {
