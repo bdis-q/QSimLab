@@ -14,6 +14,7 @@ git merge a1-omsim -m "Continue to work on a2."
 Then, you can compile and run this project. Please note that the `Makefile` is designed for Windows. Codes that need to be implemented are marked with `[TODO]` labels. 
 
 ```shell
+make clean
 make
 [path_to_your_QSimLab_dir]/QSimLab/obj/main.exe > output.txt
 ```
