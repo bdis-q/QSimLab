@@ -21,10 +21,11 @@ void SVSim(Matrix<DTYPE>& sv, QCircuit& qc) {
 /**
  * @brief [TODO] Conduct the state vector simulation for a quantum gate
  * 
- * @param sv    the state vector
- * @param gate  the processing gate
+ * @param sv   the state vector
+ * @param gate the processing gate
+ * @param myRank the MPI rank
  */
-void svsimForGate(Matrix<DTYPE>& sv, QGate& gate) {
+void svsimForGate(Matrix<DTYPE>& sv, QGate& gate, int myRank) {
     bool isAccessed[sv.row];
     memset(isAccessed, 0, sv.row*sizeof(bool));
     
@@ -80,7 +81,7 @@ void svsimForGate(Matrix<DTYPE>& sv, QGate& gate) {
 
         // 3. Check the control bits of the current amplitude
         //    If the control bits are not satisfied, skip this amplitude group
-        if (! isLegalControlPattern(ampidx, gate)) {
+        if (! isQuanPathLegalControlPattern(ampidx, gate, log2(sv.row), myRank)) {
             continue;
         }
 
@@ -102,7 +103,7 @@ void svsimForGate(Matrix<DTYPE>& sv, QGate& gate) {
  */
 bool isLegalControlPattern(ll ampidx, QGate& gate) {
     int ctrl;
-    ll ctrlmask = 0;
+    ll ctrlmask;
     for (int i = 0; i < gate.numControls(); ++ i) {
         // [TODO] Check the control qubits of the gate ////////////////
         // [HINT] If the i-th bit of amp is 0 and q_i is a |1> control qubit of gate, return false. 
