@@ -19,8 +19,9 @@ void SVSim(Matrix<DTYPE>& sv, QCircuit& qc);
  * 
  * @param sv   the state vector
  * @param gate the processing gate
+ * @param myRank the MPI rank
  */
-void svsimForGate(Matrix<DTYPE>& sv, QGate& gate);
+void svsimForGate(Matrix<DTYPE>& sv, QGate& gate, int myRank=0);
 
 /**
  * @brief [TODO] Check if the index of an amplitude is a legal control pattern of the gate
