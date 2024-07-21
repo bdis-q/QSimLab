@@ -1,7 +1,7 @@
 #include "svsim.h"
 
 /**
- * @brief State vector simulation of a quantum circuit on the state vector
+ * @brief Conduct the state vector simulation for a quantum circuit
  * 
  * @param sv    the initial state vector
  * @param qc    a quantum circuit
@@ -19,7 +19,7 @@ void SVSim(Matrix<DTYPE>& sv, QCircuit& qc) {
 }
 
 /**
- * @brief [TODO] State vector simulation for a quantum gate
+ * @brief [TODO] Conduct the state vector simulation for a quantum gate
  * 
  * @param sv    the state vector
  * @param gate  the processing gate
