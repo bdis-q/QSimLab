@@ -95,10 +95,10 @@ void svsimForGate(Matrix<DTYPE>& sv, QGate& gate) {
 /**
  * @brief [TODO] Check if the index of an amplitude is a legal control pattern of the gate
  * 
- * @param amp  the amplitude index
- * @param gate the processing gate
- * @return true  amp is a legal control pattern
- * @return false amp is an illegal control pattern
+ * @param ampidx the amplitude index
+ * @param gate   the processing gate
+ * @return true  ampidx is a legal control pattern
+ * @return false ampidx is an illegal control pattern
  */
 bool isLegalControlPattern(ll ampidx, QGate& gate) {
     int ctrl;
