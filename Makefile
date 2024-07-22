@@ -49,9 +49,9 @@ $(OBJ_DIR)/%.o: %.cpp
 	@$(COMPILE) -c $< -o $@
 
 # executable files: main/*.cpp -> obj/*
-$(OBJ_DIR)/%: $(OBJ_DIR) $(MAIN_CPPS) $(UTIL_OBJS) $(QSIM_OBJS)
+$(OBJ_DIR)/%: $(OBJ_DIR) $(MAIN_CPPS) $(QSIM_OBJS)
 	@echo "[INFO] Linking" $@ ...
-	@$(COMPILE) $(patsubst $(OBJ_DIR)/%,$(MAIN_DIR)/%.cpp,$@) $(UTIL_OBJS) $(QSIM_OBJS) -o $@
+	@$(COMPILE) $(patsubst $(OBJ_DIR)/%,$(MAIN_DIR)/%.cpp,$@) $(QSIM_OBJS) -o $@
 	@echo "[INFO]" $@ "has been built. "
 
 # clean
