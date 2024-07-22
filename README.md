@@ -4,6 +4,7 @@
 
 The assignment description can be found in [240805-a3-DisQSim.pdf](https://github.com/bdis-q/QSimLab/blob/a3-disqsim/240805-a3-DisQSim.pdf). 
 To get started, please make sure that you have already commit the changes made to `a2-svsim`. Then, checkout to the `a3-disqsim` branch and merge the work from `a2-svsim`. 
+You may need to fix merge conflicts. 
 
 ```shell
 git checkout a3-disqsim
