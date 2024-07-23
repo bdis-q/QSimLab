@@ -26,8 +26,8 @@ def separableqc():
         qc.ry(i / numQubits, i)
     for i in range(numQubits):
         qc.rz(i / numQubits, i)
-    qc.swap(0, 2)
-    qc.swap(1, 3)
+    qc.swap(0, 3)
+    qc.swap(numQubits-1, numQubits-2)
 
     return qc
 

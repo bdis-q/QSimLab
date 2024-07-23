@@ -81,7 +81,7 @@ void svsimForGate(Matrix<DTYPE>& sv, QGate& gate, int myRank) {
 
         // 3. Check the control bits of the current amplitude
         //    If the control bits are not satisfied, skip this amplitude group
-        if (! isQuanPathLegalControlPattern(ampidx, gate, log2(sv.row), myRank)) {
+        if (! isDistributedLegalControlPattern(ampidx, gate, log2(sv.row), myRank)) {
             continue;
         }
 

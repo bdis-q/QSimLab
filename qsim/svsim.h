@@ -1,7 +1,7 @@
 #pragma once
 
 #include "qcircuit.h"
-#include "quanpath.h"
+#include "qhipster.h"
 
 /**
  * @brief Conduct the state vector simulation for a quantum circuit

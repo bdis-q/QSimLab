@@ -17,7 +17,7 @@ Then, you can compile and run this project. Codes that need to be implemented ar
 ```shell
 make clean
 make
-mpirun -np 16 obj/main
+mpirun -np 16 obj/main # the number of processes is 16
 ```
 
 Once you have completed all the missing parts, you can compare the simulation results with the output of the Qiskit simulator provided in the `py/main.py`. We use `qiskit@1.0.2` and `qiskit_aer@0.14.0.1`. 
