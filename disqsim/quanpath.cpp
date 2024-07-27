@@ -81,17 +81,17 @@ void* highOMSim(void* arg) {
         // [TODO] Calculate the operation matrix for gates applied to high-order qubits
         // [HINT] We have modified getCompleteMatrix to deal with MARK
         //        In this assignment, MARK is associated with an identity matrix
-        // cout << "[TODO] Calculate the operation matrix for gates applied to high-order qubits" << endl;
-        // MPI_Abort(MPI_COMM_WORLD, 1);
-        levelmat = move(getCompleteMatrix(qc.gates[j][qid]));
-        for (int i = qid - 1; i >= numLowQubits; -- i) {
-            if (qc.gates[j][i].isMARK() && qc.gates[j][i].targetQubits[0] >= numLowQubits) {
-                continue;
-            }
-            Matrix<DTYPE> tmpmat = move(getCompleteMatrix(qc.gates[j][i]));
-            levelmat = move(levelmat.tensorProduct(tmpmat));
-        }
-        opmat = move(levelmat * opmat);
+        cout << "[TODO] Calculate the operation matrix for gates applied to high-order qubits" << endl;
+        MPI_Abort(MPI_COMM_WORLD, 1);
+
+
+
+
+
+
+
+
+
         // ///////////////////////////////////////////////////////////////////////////
     }
 
@@ -120,37 +120,27 @@ void merge(Matrix<DTYPE>& localSv, Matrix<DTYPE>* ptrOpmat, int numWorkers, int 
     }
 
     // [TODO] Conduct the final merge operation
-    // cout << "[TODO] Conduct the final merge operation. " << endl;
-    // MPI_Abort(MPI_COMM_WORLD, 1);
+    cout << "[TODO] Conduct the final merge operation. " << endl;
+    MPI_Abort(MPI_COMM_WORLD, 1);
     // all-to-all communication 1
-    int ret = MPI_Alltoall(sendbuf, sendcnt, MPI_DTYPE, 
-                           recvbuf, sendcnt, MPI_DTYPE, MPI_COMM_WORLD);
-    assert(ret == MPI_SUCCESS);
+
 
     // local merge computation
-    for (ll k = 0; k < localSv.row; ++ k) {
-        sendbuf[k] = 0;
-    }
-    ll iStart, jStart;
-    for (int i = 0; i < numWorkers; ++ i) {
-        iStart = i * sendcnt; // the start point of each sendcnt
-        for (int j = 0; j < numWorkers; ++ j) {
-            jStart = j * sendcnt; // the offset within each sendcnt
-            for (ll k = 0; k < sendcnt; ++ k) {
-                sendbuf[iStart + k] += ptrOpmat->data[i][j] * recvbuf[jStart + k];
-            }
-        }
-    }
+
+
+
+
+
+
+
 
     // all-to-all communication 2
-    ret = MPI_Alltoall(sendbuf, sendcnt, MPI_DTYPE, 
-                       recvbuf, sendcnt, MPI_DTYPE, MPI_COMM_WORLD);
-    assert(ret == MPI_SUCCESS);
+
 
     // update localSv
-    for (ll k = 0; k < localSv.row; ++ k) {
-        memcpy(localSv.data[k], recvbuf + k, sizeof(DTYPE));
-    }
+
+
+
     // ///////////////////////////////////////////////////////////////////////////
 
     delete [] sendbuf;

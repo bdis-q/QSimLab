@@ -64,20 +64,20 @@ bool isDistributedLegalControlPattern(ll ampidx, QGate& gate, int numLowQubits, 
     for (int i = 0; i < gate.numControls(); ++ i) {
         // [HINT] If the control qubits is low-order, mask with ampidx
         //        Otherwise, mask with myRank
-        // cout << "[TODO] Check the control qubits of the gate." << endl;
-        // MPI_Abort(MPI_COMM_WORLD, 1);
-        ctrl = gate.controlQubits[i];
-        if (ctrl < numLowQubits) {
-            ctrlmask = (1 << ctrl);
-            if ((ampidx & ctrlmask) == 0) {
-                return false;
-            }
-        } else {
-            ctrlmask = (1 << (ctrl - numLowQubits));
-            if ((myRank & ctrlmask) == 0) {
-                return false;
-            }
-        }
+        cout << "[TODO] Check the control qubits of the gate." << endl;
+        MPI_Abort(MPI_COMM_WORLD, 1);
+
+
+
+
+
+
+
+
+
+
+
+
         // ///////////////////////////////////////////////////////////////////////////
     }
     return true;
@@ -201,29 +201,29 @@ MPI_Comm getPeerComm(int numLowQubits, int numHighQubits, QGate& gate, int myRan
         peerIdx = 1: peerStride = (1 << highTargs[0]) = 1_0 (2), peerRank = 1_0_1_0 (10)
         peerRanks = {1_0_0_0 (8), 1_0_1_0 (10)}
     */
-    // cout << "[TODO] Build peerRanks. " << endl;
-    // MPI_Abort(MPI_COMM_WORLD, 1);
-    for (int idx = 0; idx < numHighQubits; ++ idx) {
-        if (gate.isControlQubit(numLowQubits + idx) && (myRank & (1 << idx)) == 0) {
-            numPeers = 0;
-            break;
-        }
-        if (gate.isTargetQubit(numLowQubits + idx)) {
-            numPeers = (numPeers << 1);
-            highTargs.push_back(idx);
-        } else if (myRank & (1 << idx)) {
-            peerBase += (1 << idx);
-        }
-    }
-    for (int peerIdx = 0; peerIdx < numPeers; ++ peerIdx) {
-        int peerStride = 0; // calculate peerStrides
-        for (size_t i = 0; i < highTargs.size(); ++ i) {
-            if (peerIdx & (1 << i)) {
-                peerStride += (1 << highTargs[i]);
-            }
-        }
-        peerRanks.push_back(peerBase + peerStride);
-    }
+    cout << "[TODO] Build peerRanks. " << endl;
+    MPI_Abort(MPI_COMM_WORLD, 1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // ////////////////////////////////////////////////////////////////////////
     MPI_Group worldGroup, peerGroup;
     MPI_Comm  peerComm;
@@ -233,12 +233,12 @@ MPI_Comm getPeerComm(int numLowQubits, int numHighQubits, QGate& gate, int myRan
               Otherwise, this function will be blocked
               When peerRanks is empty, it can safely set peerComm to MPI_COMM_NULL
     */
-    // cout << "[TODO] Create a new MPI_Comm communicator 'peerComm' based on peerRanks. " << endl;
-    // MPI_Abort(MPI_COMM_WORLD, 1);
-    MPI_Comm_group(MPI_COMM_WORLD, &worldGroup);
-    MPI_Group_incl(worldGroup, peerRanks.size(), peerRanks.data(), &peerGroup);
-    int ret = MPI_Comm_create(MPI_COMM_WORLD, peerGroup, &peerComm);
-    assert(ret == MPI_SUCCESS);
+    cout << "[TODO] Create a new MPI_Comm communicator 'peerComm' based on peerRanks. " << endl;
+    MPI_Abort(MPI_COMM_WORLD, 1);
+
+
+
+
     // ////////////////////////////////////////////////////////////////////////
     MPI_Group_free(&peerGroup);
     MPI_Group_free(&worldGroup);
@@ -289,17 +289,17 @@ pair<vector<ll>, vector<ll>> compactLocalAmp(vector<DTYPE>& sendbuf, QGate& gate
     // <e.g.> For worker 00, the stride between a_0010 and a_0000 is 2
     // 
     vector<ll> strides;
-    // cout << "[TODO] Calculate the strides for locally involved amplitudes. " << endl;
-    // MPI_Abort(MPI_COMM_WORLD, 1);
-    for (ll idx = 0; idx < (1 << lowTargs.size()); ++ idx) {
-        ll stride = 0;
-        for (size_t j = 0; j < lowTargs.size(); ++ j) {
-            if (idx & (1 << j)) {
-                stride += (1 << lowTargs[j]);
-            }
-        }
-        strides.push_back(stride);
-    }
+    cout << "[TODO] Calculate the strides for locally involved amplitudes. " << endl;
+    MPI_Abort(MPI_COMM_WORLD, 1);
+
+
+
+
+
+
+
+
+
     // ///////////////////////////////////////////////////////////
 
     // 
@@ -311,16 +311,16 @@ pair<vector<ll>, vector<ll>> compactLocalAmp(vector<DTYPE>& sendbuf, QGate& gate
     vector<DTYPE> compbuf; // save the amplitudes after reordering
     bool isAccessed[sendbuf.size()];
     memset(isAccessed, 0, sendbuf.size()*sizeof(bool));
-    // cout << "[TODO] Construct heads and compbuf. " << endl;
-    // MPI_Abort(MPI_COMM_WORLD, 1);
-    for (size_t ampidx = 0; ampidx < sendbuf.size(); ++ ampidx) {
-        if (isAccessed[ampidx]) continue;
-        heads.push_back(ampidx);
-        for (size_t idx = 0; idx < strides.size(); ++ idx) {
-            compbuf.push_back(sendbuf[ampidx + strides[idx]]);
-            isAccessed[ampidx + strides[idx]] = true;
-        }
-    }
+    cout << "[TODO] Construct heads and compbuf. " << endl;
+    MPI_Abort(MPI_COMM_WORLD, 1);
+
+
+
+
+
+
+
+
     // ///////////////////////////////////////////////////////////
 
     // 

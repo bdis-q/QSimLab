@@ -21,11 +21,10 @@ void SVSim(Matrix<DTYPE>& sv, QCircuit& qc) {
 /**
  * @brief [TODO] Conduct the state vector simulation for a quantum gate
  * 
- * @param sv   the state vector
- * @param gate the processing gate
- * @param myRank the MPI rank
+ * @param sv    the state vector
+ * @param gate  the processing gate
  */
-void svsimForGate(Matrix<DTYPE>& sv, QGate& gate, int myRank) {
+void svsimForGate(Matrix<DTYPE>& sv, QGate& gate) {
     bool isAccessed[sv.row];
     memset(isAccessed, 0, sv.row*sizeof(bool));
     
@@ -48,17 +47,17 @@ void svsimForGate(Matrix<DTYPE>& sv, QGate& gate, int myRank) {
         (3) If there are 'gate.numTargets()' target qubits, there are 'numAmps' amplitudes. 
     */
     vector<ll> strides;
-    // cout << "[TODO] Calculate the strides for the involved amplitudes." << endl;
-    // exit(1);
-    for (ll idx = 0; idx < numAmps; ++ idx) {
-        ll stride = 0;
-        for (int j = 0; j < gate.numTargets(); ++ j) {
-            if (idx & (1 << j)) { // if the j-th bit of idx is 1
-                stride += (1 << gate.targetQubits[j]);
-            }
-        }
-        strides.push_back(stride);
-    }
+    cout << "[TODO] Calculate the strides for the involved amplitudes. " << endl;
+    exit(1);
+
+
+
+
+
+
+
+
+
     // ///////////////////////////////////////////////////////////
 
     // 2. Iterate over all amplitudes
@@ -67,16 +66,16 @@ void svsimForGate(Matrix<DTYPE>& sv, QGate& gate, int myRank) {
         if (isAccessed[ampidx]) continue;
 
         // [TODO] 2.2. Save the involved amplitudes to amps_vec and mark them as accessed
-        // cout << "[TODO] Save the involved amplitudes to amps_vec and mark them as accessed." << endl;
-        // exit(1);
-        for (ll idx = 0; idx < numAmps; ++ idx) {
-            if (ampidx + strides[idx] >= sv.row) {
-                cout << "[ERROR] Exceed the length of the state vector." << endl;
-                exit(1);
-            }
-            amps_vec.data[idx][0] = sv.data[ampidx + strides[idx]][0];
-            isAccessed[ampidx + strides[idx]] = true;
-        }
+        cout << "[TODO] Save the involved amplitudes to amps_vec and mark them as accessed. " << endl;
+        exit(1);
+
+
+
+
+
+
+
+
         // ///////////////////////////////////////////////////////////
 
         // 3. Check the control bits of the current amplitude
@@ -107,14 +106,14 @@ bool isLegalControlPattern(ll ampidx, QGate& gate) {
     for (int i = 0; i < gate.numControls(); ++ i) {
         // [TODO] Check the control qubits of the gate ////////////////
         // [HINT] If the i-th bit of amp is 0 and q_i is a |1> control qubit of gate, return false. 
-        // cout << "[TODO] Check the control qubits of the gate." << endl;
-        // exit(1);
-        ctrl = gate.controlQubits[i];
-        ctrlmask = (1 << ctrl);
-        // 1-controlled and the control qubit of amp is 0
-        if ((ampidx & ctrlmask) == 0) {
-            return false;
-        }
+        cout << "[TODO] Check the control qubits of the gate." << endl;
+        exit(1);
+
+
+
+
+
+
         // ///////////////////////////////////////////////////////////
     }
     return true;
