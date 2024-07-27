@@ -1,11 +1,9 @@
 #pragma once
 
 #include <mpi.h>
-
-#include "omsim.h"
 #include "svsim.h"
 
-#define MPI_DTYPE MPI_DOUBLE_COMPLEX
+#define MPI_DTYPE MPI_CXX_DOUBLE_COMPLEX
 
 /**
  * @brief qHiPSTER, a basic distributed SVSim implementation
@@ -60,10 +58,44 @@ void distributedSVSimForOneLevel(Matrix<DTYPE>& localSv, QCircuit& qc, int level
  */
 MPI_Comm getPeerComm(int numLowQubits, int numHighQubits, QGate& gate, int myRank);
 
+// 
+// Distributed SVSim
+//
 
+/**
+ * @brief [TODO] Order local amplitudes to construct a sendbuf for MPI_Alltoall
+ *
+ * @param sendbuf the input and the output buffer of local amplitudes
+ * @param gate the processing gate
+ * @return pair.first   the index of the first amplitude within each group originally
+ * @return pair.second  the strides for locally involved amplitudes
+ */
 pair<vector<ll>, vector<ll>> compactLocalAmp(vector<DTYPE>& sendbuf, QGate& gate);
+
+/**
+ * @brief Conduct SVSim on the recvbuf after MPI_Alltoall with compacted amplitudes
+ *
+ * @param compbuf the local state vector after MPI_Alltoall
+ * @param numPeers the number of peer processes involved in the communication
+ * @param gate the processing gate
+ * @param heads the index of the first amplitude within each group originally
+ */
 void svsimOnCompactedAmp(vector<DTYPE>& compbuf, int numPeers, QGate& gate, vector<ll>& heads);
-void reorderLocalAmp(vector<DTYPE>& compbuf, pair<vector<ll>, vector<ll>>& ampOrder);
 
+/**
+ * @brief Recover the local amplitudes to their original places
+ *
+ * @param compbuf the compacted local state vector
+ * @param ampOrder information about amplitude positions
+ */
+void recoverLocalAmp(vector<DTYPE>& compbuf, pair<vector<ll>, vector<ll>>& ampOrder);
 
+/**
+ * @brief Print the simulation results of all processes
+ *
+ * @param localSv the local state vector for each process
+ * @param fname the name of the output file
+ * @param numWorkers the total number of processes
+ * @param myRank the MPI rank of the current process
+ */
 void printSimResults(Matrix<DTYPE>& localSv, string fname, int numWorkers, int myRank);

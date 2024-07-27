@@ -41,10 +41,10 @@ int main() {
         qc.print();
     }
 
-    qHiPSTER(qc, numWorkers, myRank);
-    QuanPath(qc, numWorkers, myRank);
+    qHiPSTER(qc, numWorkers, myRank); // call qHiPSTER
+    QuanPath(qc, numWorkers, myRank); // call QuanPath
 
-    // Check simulation results
+    // Check simulation results using SVSim
     if (myRank == 0) {
         Matrix<DTYPE> sv((1 << qc.numQubits), 1);
         for (int i = 0; i < numWorkers; ++ i) {

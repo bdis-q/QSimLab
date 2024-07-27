@@ -26,24 +26,24 @@ Matrix<DTYPE> OMSim(Matrix<DTYPE>& sv, QCircuit& qc) {
             exit(1);
         }
         // [TODO] Calculate the operation matrix of level j //////////////////////////
-        cout << "[TODO] Calculate the operation matrix of level j" << endl;
-        exit(1);
+        // cout << "[TODO] Calculate the operation matrix of level j" << endl;
+        // exit(1);
         // [TODO] Step 1. Let levelmat be the complete gate matrix of the highest gate
-
+        levelmat = move(getCompleteMatrix(qc.gates[j][qid]));
         // ///////////////////////////////////////////////////////////////////////////
         // [TODO] Step 2. Get the complete gate matrices of the remaining gates
         //        Step 2.1. Skip the MARK gates
         //        Step 2.2. Calculate the tensor product of the gate matrices
-
-
-
-
-
-
-
+        for (int i = qid - 1; i >= 0; -- i) {
+            if (qc.gates[j][i].isMARK()) {
+                continue;
+            }
+            Matrix<DTYPE> tmpmat = move(getCompleteMatrix(qc.gates[j][i]));
+            levelmat = move(levelmat.tensorProduct(tmpmat));
+        }
         // ///////////////////////////////////////////////////////////////////////////
         // [TODO] Step 3. Update the operation matrix opmat for the entire circuit
-
+        opmat = levelmat * opmat;
         // ///////////////////////////////////////////////////////////////////////////
     }
     // update the state vector sv
@@ -67,16 +67,16 @@ Matrix<DTYPE> getCompleteMatrix(QGate& gate) {
     }
     if (gate.is2QubitControlled()) {
         // [TODO] Return the complete matrix of a 2-qubit controlled gate
-        cout << "[TODO] Return the complete matrix of a 2-qubit controlled gate" << endl;
-        exit(1);
-
+        // cout << "[TODO] Return the complete matrix of a 2-qubit controlled gate" << endl;
+        // exit(1);
+        return genControlledGateMatrix(gate);
         // ///////////////////////////////////////////////////////////////////////////
     }
     if (gate.gname == "SWAP") {
         // [TODO] Return the complete matrix of a SWAP gate
-        cout << "[TODO] Return the complete matrix of a SWAP gate" << endl;
-        exit(1);
-
+        // cout << "[TODO] Return the complete matrix of a SWAP gate" << endl;
+        // exit(1);
+        return genSwapGateMatrix(gate);
         // ///////////////////////////////////////////////////////////////////////////
     }
     cout << "[ERROR] getCompleteMatrix: " << gate.gname << " not implemented" << endl;
@@ -101,27 +101,27 @@ Matrix<DTYPE> genControlledGateMatrix(QGate& gate) {
         // basismat = | i >< i |
         basismat.zero(1 << abs(ctrl-targ), 1 << abs(ctrl-targ));
         basismat.data[i][i] = 1;
-        
+
         // [TODO] Calculate the complete gate matrix of a 2-qubit controlled gate
         // [HINT] Case 1. If ctrl = 1 and ctrl > targ, ctrlmat += | i >< i | \otimes gate
         //        Case 2. If ctrl = 1 and ctrl < targ, ctrlmat += gate \otimes | i >< i |
         //        Case 3. If ctrl = 0 and ctrl > targ, ctrlmat += | i >< i | \otimes IDE
         //        Case 4. If ctrl = 0 and ctrl < targ, ctrlmat += IDE \otimes | i >< i |
-        cout << "[TODO] Calculate the complete gate matrix of a 2-qubit controlled gate" << endl;
-        exit(1);
-
-
-
-
-
-
-
-
-
-
-
-
-
+        // cout << "[TODO] Calculate the complete gate matrix of a 2-qubit controlled gate" << endl;
+        // exit(1);
+        if ((i & mask) == mask) { // control qubit = 1
+            if (ctrl > targ) { // ctrlmat += | i >< i | \otimes gate
+                ctrlmat += basismat.tensorProduct(*gate.gmat);
+            } else { // ctrlmat += gate \otimes | i >< i |
+                ctrlmat += gate.gmat->tensorProduct(basismat);
+            }
+        } else {
+            if (ctrl > targ) { // ctrlmat += | i >< i | \otimes IDE
+                ctrlmat += basismat.tensorProduct(IDE);
+            } else { // ctrlmat += IDE \otimes | i >< i |
+                ctrlmat += IDE.tensorProduct(basismat);
+            }
+        }
         // ///////////////////////////////////////////////////////////////////////////
     }
     return ctrlmat;

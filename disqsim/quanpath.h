@@ -1,9 +1,7 @@
 #pragma once
 
-#include <mpi.h>
-
+#include "qhipster.h"
 #include "omsim.h"
-#include "svsim.h"
 
 /**
  * @brief QuanPath
