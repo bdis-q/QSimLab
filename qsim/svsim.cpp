@@ -23,8 +23,9 @@ void SVSim(Matrix<DTYPE>& sv, QCircuit& qc) {
  * 
  * @param sv    the state vector
  * @param gate  the processing gate
+ * @param myRank the MPI rank
  */
-void svsimForGate(Matrix<DTYPE>& sv, QGate& gate) {
+void svsimForGate(Matrix<DTYPE>& sv, QGate& gate, int myRank) {
     bool isAccessed[sv.row];
     memset(isAccessed, 0, sv.row*sizeof(bool));
     
